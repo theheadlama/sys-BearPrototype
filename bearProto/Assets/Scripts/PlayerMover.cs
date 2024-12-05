@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,10 @@ public class PlayerMover : MonoBehaviour
     // vars to hold input actions using new input system (wait on JumpAction for now)
     InputAction moveAction;
 //    InputAction jumpAction;
-    
+    // set up default index for multiplayer
+    [SerializeField]
+    private int playerIndex = 0;
+
     // Movement speed in units per second
     [SerializeField]
     private float moveSpeed = 5f;
@@ -30,12 +34,14 @@ public class PlayerMover : MonoBehaviour
 
     // Cached transform for better performance
     private Transform cachedTransform;
-    private Vector3 movement;
+    
+    private Vector3 movement = Vector3.zero;
+    private Vector2 inputVector = Vector2.zero;
 
     private void Start()
     {
         // initialize input vars
-        moveAction = InputSystem.actions.FindAction("Move");
+        moveAction = InputSystem.actions.FindAction("CharacterMovement");
      //   jumpAction = InputSystem.actions.FindAction("Jump");
         
         // Get the Rigidbody component
@@ -49,8 +55,18 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+    public int GetPlayerIndex() {
+        return playerIndex;
+    }
+
+    public void SetInputVector(Vector2 direction) {
+        inputVector = direction;
+    }
+
     private void FixedUpdate()
     {
+        // this is going to need to be replaced with a more abstracted reference
+        // in order to accommodate two player
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
 
         bool controlInput = false;
