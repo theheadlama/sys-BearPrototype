@@ -1,3 +1,15 @@
+/* Camera script for "bear" prototype.
+| Camera is in a fixed angle isometric position, and tracks the character as it moves 
+| around the playfield. Many features to generate a smooth movement, 
+| to establish a dead zone in which the camera does not follow 
+| unless the character moves toward the edge of the screen
+| 
+| Future work is to have the camera use the centroid of multiple characters as its 
+| target point, and to use the camera's frustum as a constraint on 
+| player movement
+*/
+
+
 using UnityEngine;
 
 public class DZ_isoCamera_claude : MonoBehaviour
