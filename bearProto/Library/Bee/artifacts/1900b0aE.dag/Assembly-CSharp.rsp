@@ -366,6 +366,7 @@
 "Assets/Scripts/isoCamera_claude.cs"
 "Assets/Scripts/PlayerMover.cs"
 "Assets/Scripts/PrefabInstantiate.cs"
+"Assets/Scripts/SpawnPointGizmo.cs"
 -langversion:9.0
 /deterministic
 /optimize+
